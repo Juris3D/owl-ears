@@ -1,15 +1,23 @@
-# Builds OwlEars.exe on GitHub's machines and publishes it as a release when a version tag (v*) is pushed.
-# The binary on the Releases page is therefore built from exactly the source at that tag.
+# Builds OwlEars.exe on GitHub's machines and publishes it as a release - so the binary on the Releases page is built
+# from exactly the source in this repository.
+# Start it: Actions > release > Run workflow (give the version, e.g. v2.0) - or push a tag v*.
 name: release
 on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version tag to create and release (e.g. v2.0)'
+        required: true
+        default: 'v2.0'
   push:
     tags: ['v*']
-  workflow_dispatch:
 permissions:
   contents: write
 jobs:
   build:
     runs-on: ubuntu-latest
+    env:
+      VERSION: ${{ github.event.inputs.version || github.ref_name }}
     steps:
       - uses: actions/checkout@v4
       - name: MinGW-w64
@@ -19,11 +27,10 @@ jobs:
       - name: Package
         run: |
           cp build/OwlEars.exe .
-          zip OwlEars_${GITHUB_REF_NAME}_win64.zip OwlEars.exe README.md LICENSE licenses/*
-      - name: Release
-        if: startsWith(github.ref, 'refs/tags/')
+          zip "OwlEars_${VERSION}_win64.zip" OwlEars.exe README.md LICENSE licenses/*
+      - name: Release (it creates the tag at this commit when it is new)
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          gh release create "$GITHUB_REF_NAME" OwlEars.exe "OwlEars_${GITHUB_REF_NAME}_win64.zip" \
-            --title "Owl Ears ${GITHUB_REF_NAME#v}" --notes-file .github/release-notes.md
+          gh release create "$VERSION" OwlEars.exe "OwlEars_${VERSION}_win64.zip" --target "$GITHUB_SHA" \
+            --title "Owl Ears ${VERSION#v}" --notes-file .github/release-notes.md

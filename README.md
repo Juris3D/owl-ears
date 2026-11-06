@@ -57,7 +57,7 @@ The signature code (`src/ears/signature.h`) is a C++ port of [shazamlite](https:
 - **Linux:** needs MinGW-w64 (Debian/Ubuntu: `apt install g++-mingw-w64-x86-64`).
 - **Windows:** needs MSYS2 (UCRT64 shell: `pacman -S mingw-w64-ucrt-x86_64-gcc`).
 
-The result is `build/OwlEars.exe`, statically linked. It uses only the parts Windows always has: WinHTTP for the network, WASAPI through miniaudio for the sound, and GDI for the window.
+The result is `build/OwlEars.exe`, statically linked. The exe on the Releases page is built by GitHub itself from this source (`.github/workflows/release.yml`: *Actions → release → Run workflow*). It uses only the parts Windows always has: WinHTTP for the network, WASAPI through miniaudio for the sound, and GDI for the window.
 
 | File | What |
 |---|---|

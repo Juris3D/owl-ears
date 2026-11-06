@@ -1,4 +1,6 @@
-**Owl Ears v3** - a small Windows song recogniser with an owl. One exe, nothing to install (Windows 10 / 11, 64-bit).
+**Owl Ears v3.1** - a small Windows song recogniser with an owl. One exe, nothing to install (Windows 10 / 11, 64-bit).
+
+**Fixed in v3.1:** KEEP LISTENING did nothing when pressed on its own - it only kept going after a PC SOUND or MICROPHONE start. Now it listens at once (PC sound, or the microphone if that was last used), counts down to the next time, and, left on, starts listening when Owl Ears starts.
 
 - **The owl** keeps watch while nothing is found: lines on the dark, amber eyes glowing with the beat of what the PC plays; while it listens its ear tufts twitch and its pupils open wide; no match: one slow blink
 - **VIEW**: CLASSIC (the cover beside the song) or PICTURE (the cover large, its soft glow behind it)

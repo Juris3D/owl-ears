@@ -31,7 +31,7 @@
 #include "../third_party/miniaudio.h"
 #include "owl.h"
 
-#define APP_TITLE L"Owl Ears - song recognition (v3)"
+#define APP_TITLE L"Owl Ears - song recognition (v3.1)"
 static const int RATE = 16000, PIECE = 49600;                  // 3.1 s at 16 kHz
 
 // ------------------------------------------------------------------ text
@@ -513,7 +513,10 @@ static void clicked(HWND h, int id) {
             if (GetOpenFileNameW(&of)) startWork(2, f);
         } break;
         case B_STOP: g_stop = true; break;
-        case B_KEEP: { std::lock_guard<std::mutex> lk(A.m); A.keep = !A.keep; } settingsSave(); break;
+        case B_KEEP: {                       // on while idle: listen now (the last of PC SOUND / MICROPHONE), then every EVERY
+            bool on; int src; { std::lock_guard<std::mutex> lk(A.m); A.keep = !A.keep; on = A.keep; src = A.source == 1 ? 1 : 0; }
+            settingsSave(); if (on && !g_running) startWork(src);
+        } break;
         case B_EVERY: { std::lock_guard<std::mutex> lk(A.m); A.every = (A.every + 1) % EVERY_N; } settingsSave(); break;
         case B_VIEW: { std::lock_guard<std::mutex> lk(A.m); A.view = (A.view + 1) % VIEW_N; } settingsSave(); break;
         case B_EYES: { bool on; { std::lock_guard<std::mutex> lk(A.m); A.eyes = !A.eyes; on = A.eyes; } eyesSet(on); settingsSave(); } break;
@@ -586,6 +589,7 @@ int WINAPI wWinMain(HINSTANCE hi, HINSTANCE, PWSTR, int show) {
     if (HMODULE dm = LoadLibraryW(L"dwmapi.dll")) if (auto f = (DSWA)GetProcAddress(dm, "DwmSetWindowAttribute")) f(g_wnd, 20, &dark, sizeof dark);   // (a dark title bar)
     if (A.eyes) eyesSet(true);
     ShowWindow(g_wnd, show); UpdateWindow(g_wnd);
+    if (A.keep) startWork(0);                // KEEP LISTENING was left on: it listens to the PC from the start
     SetTimer(g_wnd, 1, 33, nullptr);
     MSG msg; while (GetMessageW(&msg, nullptr, 0, 0)) { TranslateMessage(&msg); DispatchMessageW(&msg); }
     return 0;

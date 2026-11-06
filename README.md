@@ -25,7 +25,7 @@ Windows SmartScreen may warn about an unknown publisher (the exe is not signed):
 | **FILE...** | A music file (MP3, FLAC, WAV, OGG): its loudest pieces, from about a third of the way into it |
 | **STOP** | The key you pressed turns into STOP while it works |
 | **VIEW** | **CLASSIC**: the cover beside the song's details. **PICTURE**: the cover large, its own soft glow filling the area behind it, the song under it. A click on the picture switches too |
-| **KEEP LISTENING** / **EVERY** | Listen again by itself every 30 s, 1, 2 or 5 minutes: a running log of what plays (the same song twice is written once) |
+| **KEEP LISTENING** / **EVERY** | Listens at once (to the PC, or the microphone if that was last), then again by itself every 30 s, 1, 2 or 5 minutes, counting down to the next time: a running log of what plays (the same song twice is written once). Left on, it starts listening when Owl Ears starts |
 | **OPEN IN SHAZAM** / **COPY** | The song's page / "Artist - Title" to the clipboard |
 | **NOTHING FOUND** | What the picture area shows when there is no song: **the owl**, **your own picture**, or **a folder of pictures** shown in turn (20 s each). **CHOOSE PICTURE... / CHOOSE FOLDER...** pick them |
 | **EYES ON THE BEAT** | The owl's eyes follow the beat of what the PC plays: Owl Ears keeps a small ear on the PC's sound for that (nothing of it is sent anywhere). Off: its eyes just breathe slowly |
@@ -83,6 +83,7 @@ Owl Ears began as a test: is Shazam-style recognition good enough to build into 
 
 | Version | |
 |---|---|
+| **v3.1** | KEEP LISTENING starts listening when you press it (before, it only kept going after PC SOUND or MICROPHONE) |
 | **v3** | The owl (eyes on the beat, listening, blinking), PICTURE view, KEEP LISTENING every 30 s / 1 / 2 / 5 min, your own picture or folder for "nothing found", settings remembered |
 | **v2** | Renamed to Owl Ears (first released as "ThunderEar"); the log moves along by itself |
 | **v1** | First version: PC sound / microphone / file, cover, history, KEEP LISTENING, where in the song, speed and pitch |

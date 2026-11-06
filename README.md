@@ -4,6 +4,10 @@
 
 ![Owl Ears](docs/screenshot.png)
 
+**The owl** keeps watch while nothing is found. It's drawn in lines on the dark; its amber eyes glow with the beat of whatever the PC plays and never go fully dark. While it listens, its ear tufts twitch with the sound and its pupils open wide; when nothing matched, it blinks once, slowly.
+
+![The owl: calm, on a beat while listening, blinking](docs/owl.png)
+
 > **Unofficial.** Owl Ears is not made by, affiliated with or endorsed by Shazam or Apple. It talks to Shazam's service the way Shazam's own app does, through an interface Shazam never published. It may stop working at any time. Use it gently: a few questions now and then, not a flood.
 
 ## Download
@@ -20,8 +24,11 @@ Windows SmartScreen may warn about an unknown publisher (the exe is not signed):
 | **MICROPHONE** | What the room plays (a hi-fi, a radio), from the default recording device. Windows may need *Settings → Privacy → Microphone → let desktop apps use it* |
 | **FILE...** | A music file (MP3, FLAC, WAV, OGG): its loudest pieces, from about a third of the way into it |
 | **STOP** | The key you pressed turns into STOP while it works |
-| **KEEP LISTENING** | After each try, listen again in 20 s: a running log of what plays (the same song twice is written once) |
+| **VIEW** | **CLASSIC**: the cover beside the song's details. **PICTURE**: the cover large, its own soft glow filling the area behind it, the song under it. A click on the picture switches too |
+| **KEEP LISTENING** / **EVERY** | Listen again by itself every 30 s, 1, 2 or 5 minutes: a running log of what plays (the same song twice is written once) |
 | **OPEN IN SHAZAM** / **COPY** | The song's page / "Artist - Title" to the clipboard |
+| **NOTHING FOUND** | What the picture area shows when there is no song: **the owl**, **your own picture**, or **a folder of pictures** shown in turn (20 s each). **CHOOSE PICTURE... / CHOOSE FOLDER...** pick them |
+| **EYES ON THE BEAT** | The owl's eyes follow the beat of what the PC plays: Owl Ears keeps a small ear on the PC's sound for that (nothing of it is sent anywhere). Off: its eyes just breathe slowly |
 | **FOUND BEFORE** | Click the heading to open the log, `%APPDATA%\ThunderOwl\OwlEars\history.txt` |
 
 The first try comes after about 3.5 s of sound. If there is no match, it tries a fresh piece about 3.5 s later, four tries at most.
@@ -46,7 +53,8 @@ The signature code (`src/ears/signature.h`) is a C++ port of [shazamlite](https:
 - **What leaves the PC:** only the signature, plus a random session ID and the time.
 - **What doesn't:** the sound itself, and anything about you.
 - **Where it goes:** to `amp.shazam.com`, and to Apple's image server for the cover picture.
-- **What stays on the PC:** the history log, a plain text file you can delete at any time.
+- **What stays on the PC:** the history log and the settings, plain text files (`%APPDATA%\ThunderOwl\OwlEars\`) you can delete at any time.
+- **The owl's beat:** with EYES ON THE BEAT on, Owl Ears listens to the PC's sound all the time, but only to find kick drums for the owl's eyes, on your PC. It is never recorded and never sent.
 
 ## Building
 
@@ -65,6 +73,7 @@ The result is `build/OwlEars.exe`, statically linked. The exe on the Releases pa
 | `src/ears/signature.h` | The signature (the port) |
 | `src/ears/shazam.h` | The request Shazam's app makes, and reading its answer |
 | `src/ears/json.h` | A small JSON reader |
+| `src/owl.h` | The owl, and the picture drawing (smooth scaling, the soft glow) |
 | `src/ma_owl.c` | miniaudio and the decoders, compiled once |
 | `third_party/` | miniaudio, stb_image, stb_vorbis (public domain) |
 
@@ -74,6 +83,7 @@ Owl Ears began as a test: is Shazam-style recognition good enough to build into 
 
 | Version | |
 |---|---|
+| **v3** | The owl (eyes on the beat, listening, blinking), PICTURE view, KEEP LISTENING every 30 s / 1 / 2 / 5 min, your own picture or folder for "nothing found", settings remembered |
 | **v2** | Renamed to Owl Ears (first released as "ThunderEar"); the log moves along by itself |
 | **v1** | First version: PC sound / microphone / file, cover, history, KEEP LISTENING, where in the song, speed and pitch |
 

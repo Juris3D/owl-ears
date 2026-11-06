@@ -1,17 +1,17 @@
 1 ICON "owlears.ico"
 1 VERSIONINFO
-FILEVERSION 2,0,0,0
-PRODUCTVERSION 2,0,0,0
+FILEVERSION 3,0,0,0
+PRODUCTVERSION 3,0,0,0
 BEGIN
   BLOCK "StringFileInfo"
   BEGIN
     BLOCK "040904B0"
     BEGIN
       VALUE "CompanyName", "Thunder Owl"
-      VALUE "FileDescription", "Owl Ears - song recognition test"
-      VALUE "FileVersion", "2.0"
+      VALUE "FileDescription", "Owl Ears - song recognition"
+      VALUE "FileVersion", "3.0"
       VALUE "ProductName", "Owl Ears"
-      VALUE "ProductVersion", "2.0"
+      VALUE "ProductVersion", "3.0"
     END
   END
   BLOCK "VarFileInfo"
